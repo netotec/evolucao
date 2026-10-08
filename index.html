@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Evolução Treinamentos</title>
+  <meta name="description" content="Sistema de Gestão de Treinamentos">
+  <meta name="robots" content="noindex">
+
+  <!-- Instalação: nome, cores e ícones usados na tela inicial do celular e na barra de tarefas -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#121212">
+  <link rel="icon" type="image/png" sizes="192x192" href="icone-192.png">
+  <link rel="apple-touch-icon" href="icone-apple-180.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Evolução">
+
+  <style>
+    html, body { height: 100%; margin: 0; background: #121212; }
+    #app { position: fixed; inset: 0; width: 100%; height: 100%; border: 0; }
+    #abrindo {
+      position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
+      background: #121212; color: #888; font: 14px 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    #abrindo img { width: 96px; height: 96px; }
+  </style>
+</head>
+<body>
+  <!-- Aparece enquanto o sistema carrega; some quando ele abre -->
+  <div id="abrindo">
+    <img src="icone-192.png" alt="">
+    <div>Abrindo o sistema...</div>
+  </div>
+
+  <!-- O sistema continua rodando no Apps Script; esta página só dá a ele nome e ícone próprios -->
+  <iframe id="app" title="Evolução Treinamentos" allow="fullscreen; clipboard-write; screen-wake-lock" allowfullscreen></iframe>
+
+  <script>
+    /* Endereço publicado do sistema no Apps Script (o link que termina em /exec) */
+    const URL_APP = 'https://script.google.com/macros/s/AKfycbzaoQNWU3_7IEOXE2hMlo3jBfjNRh71TowmCo5zIh0rFqSbt_bYRY8sHJ8gjf48CKcR/exec';
+
+    const quadro = document.getElementById('app');
+    quadro.addEventListener('load', function() {
+      const abrindo = document.getElementById('abrindo');
+      if (abrindo) abrindo.remove();
+    });
+    /* O que vier depois do "?" no endereço desta página é repassado ao sistema (ex.: ?pagina=prova) */
+    quadro.src = URL_APP + location.search;
+  </script>
+</body>
+</html>
